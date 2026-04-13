@@ -103,7 +103,6 @@ Cada vez que hagas `git push` a la rama `main`, Netlify redespliega el sitio aut
 ## Contacto
 
 - **Correo:** maricarmen19salazar@gmail.com
-- **WhatsApp:** +593 985 669 159
 - **LinkedIn:** [linkedin.com/in/mariasalazar24](https://www.linkedin.com/in/mariasalazar24)
 - **GitHub:** [github.com/MariaDSalazar](https://github.com/MariaDSalazar)
 - **ORCID:** [orcid.org/0009-0005-5661-4428](https://orcid.org/0009-0005-5661-4428)
