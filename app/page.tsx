@@ -341,15 +341,20 @@ function SectionHeading({
   title,
   titleVariant = "tech",
   description,
+  reveal,
 }: {
   badge: string;
   badgeVariant?: "tech" | "social" | "neutral";
   title: string;
   titleVariant?: "tech" | "social";
   description?: string;
+  reveal?: boolean;
 }) {
   return (
-    <div className="section-heading">
+    <div
+      className={`section-heading${reveal ? " reveal" : ""}`}
+      {...(reveal ? { "data-reveal": "" } : {})}
+    >
       <div className="section-heading__title-row">
         <span
           className={`section-heading__badge section-heading__badge--${badgeVariant}`}
@@ -524,11 +529,12 @@ export default function Home() {
               badgeVariant="neutral"
               title="Tecnología con propósito humano"
               description="Conoce el perfil, la trayectoria y el valor diferencial que puedo aportar a tu equipo."
+              reveal
             />
 
             <div className="about-layout">
               {/* Narrativa */}
-              <div className="about-bio">
+              <div className="about-bio reveal" data-reveal="">
                 <p className="about-bio__lead">
                   Ingeniera que piensa como trabajadora social.{" "}
                   <em>Desarrolladora que enseña. Investigadora que construye.</em>
@@ -564,19 +570,19 @@ export default function Home() {
 
               {/* Estadísticas */}
               <div className="about-stats">
-                <div className="stat-card">
+                <div className="stat-card reveal reveal--delay-1" data-reveal="">
                   <span className="stat-card__number">2</span>
                   <span className="stat-card__label">Carreras universitarias concluidas</span>
                 </div>
-                <div className="stat-card">
+                <div className="stat-card reveal reveal--delay-2" data-reveal="">
                   <span className="stat-card__number">9<sup style={{fontSize:"1rem"}}>m</sup></span>
                   <span className="stat-card__label">Pasantía en entorno real de alta demanda</span>
                 </div>
-                <div className="stat-card">
+                <div className="stat-card reveal reveal--delay-3" data-reveal="">
                   <span className="stat-card__number stat-card__number--social">5+</span>
                   <span className="stat-card__label">Certificaciones y participaciones académicas</span>
                 </div>
-                <div className="stat-card">
+                <div className="stat-card reveal reveal--delay-4" data-reveal="">
                   <span className="stat-card__number stat-card__number--social">MSc</span>
                   <span className="stat-card__label">Maestría en Docencia e Investigación en curso</span>
                 </div>
@@ -596,12 +602,14 @@ export default function Home() {
               title="Tecnología y Software"
               titleVariant="tech"
               description="Ocho especialidades técnicas con base práctica y enfoque en soluciones reales. Desde el código hasta la infraestructura, pasando por hardware, seguridad y redes."
+              reveal
             />
 
             <div className="features-grid">
-              {techServices.map((s) => (
+              {techServices.map((s, i) => (
                 <article
-                  className="feature-card feature-card--tech"
+                  className={`feature-card feature-card--tech reveal reveal--delay-${(i % 4) + 1}`}
+                  data-reveal=""
                   key={s.title}
                 >
                   <span className="feature-card__icon-wrap feature-card__icon-wrap--tech">
@@ -626,12 +634,14 @@ export default function Home() {
               title="Educación e Inclusión"
               titleVariant="social"
               description="Cuatro competencias donde la formación académica se convierte en impacto real: docencia, investigación científica, intervención social e inclusión de comunidades vulnerables."
+              reveal
             />
 
             <div className="features-grid">
-              {socialServices.map((s) => (
+              {socialServices.map((s, i) => (
                 <article
-                  className="feature-card feature-card--social"
+                  className={`feature-card feature-card--social reveal reveal--delay-${(i % 4) + 1}`}
+                  data-reveal=""
                   key={s.title}
                 >
                   <span className="feature-card__icon-wrap feature-card__icon-wrap--social">
@@ -655,12 +665,13 @@ export default function Home() {
               badgeVariant="neutral"
               title="Formación y Experiencia"
               description="Cada etapa ha sumado una capa de profundidad al perfil: títulos académicos registrados, experiencia práctica en instituciones públicas y privadas, y participaciones que demuestran iniciativa más allá del aula."
+              reveal
             />
 
             <TimelineLabel variant="edu">Formación Académica</TimelineLabel>
             <div className="timeline">
               {educationItems.map((item) => (
-                <article className="timeline__item" key={item.title}>
+                <article className="timeline__item reveal" data-reveal="" key={item.title}>
                   <span className={`timeline__dot ${item.dotClass}`} />
                   <div className="timeline__content">
                     <h3>{item.title}</h3>
@@ -674,7 +685,7 @@ export default function Home() {
             <TimelineLabel variant="work">Experiencia Laboral</TimelineLabel>
             <div className="timeline">
               {experienceItems.map((item) => (
-                <article className="timeline__item" key={item.title}>
+                <article className="timeline__item reveal" data-reveal="" key={item.title}>
                   <span className={`timeline__dot ${item.dotClass}`} />
                   <div className="timeline__content">
                     <h3>{item.title}</h3>
@@ -688,7 +699,7 @@ export default function Home() {
             <TimelineLabel variant="cert">Certificados y Participaciones</TimelineLabel>
             <div className="timeline">
               {certificationItems.map((item) => (
-                <article className="timeline__item" key={item.title}>
+                <article className="timeline__item reveal" data-reveal="" key={item.title}>
                   <span className="timeline__dot timeline__dot--cert" />
                   <div className="timeline__content">
                     <h3>{item.title}</h3>
@@ -705,7 +716,7 @@ export default function Home() {
             CONTACTO
         ══════════════════════════════ */}
         <section className="contact-section" id="contacto">
-          <div className="contact-section__inner">
+          <div className="contact-section__inner reveal" data-reveal="">
 
             <span className="contact-available">
               <span className="contact-available__dot" />

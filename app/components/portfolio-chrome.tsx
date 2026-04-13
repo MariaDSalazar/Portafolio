@@ -51,6 +51,7 @@ export function PortfolioChrome({ navigationItems }: PortfolioChromeProps) {
       storedTheme === "dark" || storedTheme === "light" ? storedTheme : "light";
 
     document.documentElement.dataset.theme = initialTheme;
+    document.documentElement.setAttribute("data-js", "");
     setTheme(initialTheme);
     setMounted(true);
   }, []);
@@ -99,12 +100,30 @@ export function PortfolioChrome({ navigationItems }: PortfolioChromeProps) {
     );
 
     sections.forEach((section) => observer.observe(section));
+
+    // ── Scroll-reveal: anima elementos con [data-reveal] al entrar en pantalla ──
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("reveal--visible");
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: "0px 0px -8% 0px", threshold: 0.08 },
+    );
+    document
+      .querySelectorAll("[data-reveal]")
+      .forEach((el) => revealObserver.observe(el));
+
     document.addEventListener("mousemove", updateSpotlight);
     document.addEventListener("mouseenter", showSpotlight);
     document.addEventListener("mouseleave", hideSpotlight);
 
     return () => {
       observer.disconnect();
+      revealObserver.disconnect();
       document.removeEventListener("mousemove", updateSpotlight);
       document.removeEventListener("mouseenter", showSpotlight);
       document.removeEventListener("mouseleave", hideSpotlight);
