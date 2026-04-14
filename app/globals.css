@@ -1652,6 +1652,271 @@ html[data-theme="dark"] .cert-view-btn { color: #fbbf24; border-color: rgba(245,
 }
 .contact-note p { margin: 0; }
 
+/* ── Badges adicionales ── */
+.section-heading__badge--edu  { background: var(--grad-edu); }
+.section-heading__grad-text--edu {
+  background: var(--grad-edu);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Tools section (home) ── */
+.tools-section { background: var(--bg-tech-section); }
+
+.tools-heading {
+  margin: 0;
+  font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.tool-groups {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.tool-group { display: flex; flex-direction: column; gap: 0.75rem; }
+
+.tool-group__label {
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.tool-group__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tool-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--tool-color, #6366f1) 30%, transparent);
+  background: color-mix(in srgb, var(--tool-color, #6366f1) 8%, var(--surface-card));
+  color: var(--text-main);
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: background 160ms ease, transform 160ms ease;
+}
+.tool-chip:hover {
+  background: color-mix(in srgb, var(--tool-color, #6366f1) 15%, var(--surface-card));
+  transform: translateY(-1px);
+}
+.tool-chip__dot {
+  width: 0.55rem; height: 0.55rem;
+  border-radius: 50%;
+  background: var(--tool-color, #6366f1);
+  flex-shrink: 0;
+}
+
+/* ── Formación: edu-timeline ── */
+.edu-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  position: relative;
+  padding-left: 2.5rem;
+}
+.edu-timeline::before {
+  content: "";
+  position: absolute;
+  top: 0.6rem; bottom: 0.6rem; left: 0.55rem;
+  width: 2px;
+  border-radius: 1px;
+  background: linear-gradient(180deg,
+    color-mix(in srgb, var(--edu-a) 40%, transparent),
+    color-mix(in srgb, var(--tech-a) 30%, transparent));
+}
+
+.edu-card {
+  position: relative;
+  display: flex;
+  gap: 1.25rem;
+  padding: 1.5rem 1.5rem 1.5rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.edu-card:last-child { border-bottom: none; }
+
+.edu-card .timeline__dot {
+  position: absolute;
+  top: 1.7rem;
+  left: -2rem;
+}
+
+.edu-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  flex: 1;
+}
+
+.edu-card__tag {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  background: var(--grad-edu);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 0.2rem;
+}
+
+/* ── Experiencia técnica: exp-timeline ── */
+.exp-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.exp-card {
+  display: grid;
+  grid-template-columns: 1.5rem 1fr;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 1.25rem;
+  background: var(--surface-card);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+.exp-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+
+.exp-card__timeline-dot-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 0.3rem;
+}
+.exp-card__timeline-dot-wrap .timeline__dot { position: static; }
+
+.exp-card__body { display: flex; flex-direction: column; gap: 0.6rem; }
+
+.exp-card__header { display: flex; flex-direction: column; gap: 0.3rem; }
+
+.exp-card__period {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+.exp-card__skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.25rem;
+}
+
+.exp-skill-chip {
+  display: inline-flex;
+  padding: 0.22rem 0.65rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--tech-a) 8%, transparent);
+  border: 1px solid var(--border-tech);
+  color: var(--tech-a);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+html[data-theme="dark"] .exp-skill-chip { color: #93c5fd; }
+
+/* ── Sobre mí: sobre-exp-grid ── */
+.sobre-exp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 3rem;
+}
+
+.sobre-exp-card {
+  display: flex;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--border);
+  border-radius: 1.25rem;
+  background: var(--surface-card);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+.sobre-exp-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+
+.sobre-exp-card--edu     { border-color: var(--border-edu); }
+.sobre-exp-card--social  { border-color: var(--border-social); }
+.sobre-exp-card--research { border-color: var(--border-cert); }
+
+.sobre-exp-card__icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.6rem; height: 2.6rem;
+  border-radius: 0.75rem;
+  flex-shrink: 0;
+}
+.sobre-exp-card--edu      .sobre-exp-card__icon-wrap { background: var(--grad-edu); }
+.sobre-exp-card--social   .sobre-exp-card__icon-wrap { background: var(--grad-social); }
+.sobre-exp-card--research .sobre-exp-card__icon-wrap { background: var(--grad-cert); }
+
+.sobre-exp-card__icon { width: 1.2rem; height: 1.2rem; color: #fff; }
+
+.sobre-exp-card__title {
+  margin: 0 0 0.2rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.35;
+}
+.sobre-exp-card__period {
+  margin: 0 0 0.4rem;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+.sobre-exp-card__desc {
+  margin: 0;
+  color: var(--text-soft);
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+
+/* cert-card__actions */
+.cert-card__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+/* cert-viewer con object */
+.cert-viewer__object {
+  width: 100%;
+  height: 620px;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  display: block;
+}
+.cert-viewer__fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 3rem 1rem;
+  text-align: center;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+}
+
 /* ═══════════════════════════════════════════════════════
    RESPONSIVE — multi-página
 ═══════════════════════════════════════════════════════ */
