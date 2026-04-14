@@ -8,10 +8,12 @@ type Certificate = {
   issuer: string;
   date: string;
   hours?: string;
-  category: "tech" | "academic" | "language";
+  category: "tech" | "language";
   pdf: string;
   description: string;
 };
+
+const BASE = process.env.NODE_ENV === "production" ? "/Portafolio" : "";
 
 const certificates: Certificate[] = [
   {
@@ -21,7 +23,7 @@ const certificates: Certificate[] = [
     date: "Nov 2024",
     hours: "70 h",
     category: "tech",
-    pdf: "/Portafolio/certificados/junior-cybersecurity-analyst.pdf",
+    pdf: `${BASE}/certificados/junior-cybersecurity-analyst.pdf`,
     description:
       "Amenazas y vulnerabilidades, criptografía aplicada, autenticación, control de acceso y respuesta a incidentes. Certificado avalado internacionalmente por Cisco.",
   },
@@ -31,9 +33,9 @@ const certificates: Certificate[] = [
     issuer: "Cisco Networking Academy",
     date: "Jun 2022",
     category: "tech",
-    pdf: "/Portafolio/certificados/packet-tracer.pdf",
+    pdf: `${BASE}/certificados/packet-tracer.pdf`,
     description:
-      "Diseño, configuración y diagnóstico de topologías de red complejas con la herramienta de simulación más utilizada en la industria.",
+      "Diseño, configuración y diagnóstico de topologías de red complejas con la herramienta de simulación estándar de la industria.",
   },
   {
     id: "ingles",
@@ -42,15 +44,14 @@ const certificates: Certificate[] = [
     date: "Ago 2023",
     hours: "768 h",
     category: "language",
-    pdf: "/Portafolio/certificados/ingles-b1.pdf",
+    pdf: `${BASE}/certificados/ingles-b1.pdf`,
     description:
-      "Certificación de suficiencia lingüística B1 según el Marco Común Europeo de Referencia para las Lenguas (MCER), con aprobación en los tres niveles cursados.",
+      "Certificación B1 según el Marco Común Europeo de Referencia para las Lenguas (MCER), con aprobación en los tres niveles cursados.",
   },
 ];
 
 const CATEGORY_LABEL: Record<string, string> = {
-  tech: "Técnico",
-  academic: "Académico",
+  tech:     "Técnico",
   language: "Idiomas",
 };
 
@@ -87,45 +88,59 @@ function CertCard({
       <p className="cert-card__date">{cert.date}</p>
       <p className="cert-card__desc">{cert.description}</p>
 
-      <button
-        className={`cert-view-btn${active ? " cert-view-btn--active" : ""}`}
-        onClick={() => onView(cert.id)}
-        type="button"
-      >
-        {active ? (
-          <>
-            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" width="16" height="16">
-              <path d="M18 6 6 18M6 6l12 12" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" />
-            </svg>
-            Cerrar visor
-          </>
-        ) : (
-          <>
-            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" width="16" height="16">
-              <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Zm10-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" />
-            </svg>
-            Ver certificado
-          </>
-        )}
-      </button>
+      <div className="cert-card__actions">
+        <button
+          className={`cert-view-btn${active ? " cert-view-btn--active" : ""}`}
+          onClick={() => onView(cert.id)}
+          type="button"
+        >
+          {active ? (
+            <>
+              <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" width="15" height="15">
+                <path d="M18 6 6 18M6 6l12 12" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" />
+              </svg>
+              Cerrar
+            </>
+          ) : (
+            <>
+              <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" width="15" height="15">
+                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Zm10-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" />
+              </svg>
+              Ver certificado
+            </>
+          )}
+        </button>
+
+        <a
+          className="cert-download-btn"
+          download
+          href={cert.pdf}
+        >
+          <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" width="15" height="15">
+            <path d="M12 3v13m0 0-4-4m4 4 4-4M3 21h18" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" />
+          </svg>
+          Descargar
+        </a>
+      </div>
 
       {active && (
         <div className="cert-viewer">
-          <iframe
-            className="cert-viewer__iframe"
-            src={cert.pdf}
-            title={`Certificado: ${cert.title}`}
-          />
-          <a
-            className="cert-download-btn"
-            download
-            href={cert.pdf}
+          <object
+            className="cert-viewer__object"
+            data={cert.pdf}
+            type="application/pdf"
           >
-            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" width="16" height="16">
-              <path d="M12 3v13m0 0-4-4m4 4 4-4M3 21h18" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" />
-            </svg>
-            Descargar PDF
-          </a>
+            {/* Fallback si el browser no soporta PDF embed */}
+            <div className="cert-viewer__fallback">
+              <p>Tu navegador no puede mostrar el PDF directamente.</p>
+              <a className="cert-download-btn" href={cert.pdf} target="_blank" rel="noopener noreferrer">
+                <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" width="15" height="15">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6m5-3h6m0 0v6m0-6L10 14" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" />
+                </svg>
+                Abrir PDF en nueva pestaña
+              </a>
+            </div>
+          </object>
         </div>
       )}
     </div>
@@ -135,9 +150,8 @@ function CertCard({
 export default function CertificacionesPage() {
   const [activeId, setActiveId] = useState<string | null>(null);
 
-  const handleView = (id: string) => {
+  const handleView = (id: string) =>
     setActiveId((prev) => (prev === id ? null : id));
-  };
 
   return (
     <main className="page-shell inner-page">
@@ -150,8 +164,7 @@ export default function CertificacionesPage() {
               <span className="section-heading__grad-text--cert">Certificaciones</span>
             </h1>
             <p className="page-hero__desc">
-              Certificaciones internacionales y reconocimientos académicos verificables.
-              Haz clic en &ldquo;Ver certificado&rdquo; para revisarlo directamente.
+              Certificaciones internacionales verificables. Haz clic en &ldquo;Ver certificado&rdquo; para revisarlo directamente.
             </p>
           </div>
 

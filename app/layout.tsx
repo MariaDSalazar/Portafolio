@@ -16,12 +16,13 @@ export const metadata: Metadata = {
 };
 
 const navigationItems = [
-  { label: "Inicio",           href: "/" },
-  { label: "Proyectos",        href: "/proyectos" },
-  { label: "Certificaciones",  href: "/certificaciones" },
-  { label: "Trayectoria",      href: "/trayectoria" },
-  { label: "Sobre mí",         href: "/sobre-mi" },
-  { label: "Contacto",         href: "/contacto" },
+  { label: "Inicio",          href: "/" },
+  { label: "Proyectos",       href: "/proyectos" },
+  { label: "Certificaciones", href: "/certificaciones" },
+  { label: "Formación",       href: "/formacion" },
+  { label: "Experiencia",     href: "/experiencia" },
+  { label: "Sobre mí",        href: "/sobre-mi" },
+  { label: "Contacto",        href: "/contacto" },
 ];
 
 export default function RootLayout({
