@@ -1664,80 +1664,113 @@ html[data-theme="dark"] .cert-view-btn { color: #fbbf24; border-color: rgba(245,
 /* ── Tools section (home) ── */
 .tools-section { background: var(--bg-tech-section); }
 
-.tool-groups {
+/* Filtros */
+.tools-filters {
   display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.tool-group { display: flex; flex-direction: column; gap: 0.85rem; }
-
-.tool-group__label {
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--text-muted);
-}
-
-/* Grid de iconos */
-.tool-icon-grid {
-  display: flex;
+  justify-content: center;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.75rem;
+  margin-bottom: 3rem;
 }
 
-.tool-icon-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.4rem;
-  width: 4.5rem;
+.tools-filter-btn {
+  padding: 0.55rem 1.4rem;
+  border-radius: 999px;
+  border: 2px solid var(--border-tech);
+  background: color-mix(in srgb, var(--tech-a) 6%, transparent);
+  color: var(--text-soft);
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 240ms ease;
 }
-
-.tool-icon-card__bg {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 3.25rem;
-  height: 3.25rem;
-  border-radius: 0.85rem;
-  background: #ffffff;
-  border: 1px solid var(--border);
-  padding: 0.55rem;
-  transition: transform 180ms ease, box-shadow 180ms ease;
+.tools-filter-btn:hover {
+  background: color-mix(in srgb, var(--tech-a) 12%, transparent);
+  border-color: var(--tech-a);
+  color: var(--tech-a);
 }
-.tool-icon-card:hover .tool-icon-card__bg {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-}
-
-.tool-icon-card__img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.tool-icon-card__abbr {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  border-radius: 0.5rem;
+.tools-filter-btn--active {
+  background: var(--grad-tech);
+  border-color: transparent;
   color: #fff;
-  font-size: 0.72rem;
-  font-weight: 900;
-  letter-spacing: 0.02em;
+  box-shadow: 0 0 18px color-mix(in srgb, var(--tech-a) 40%, transparent);
 }
 
-.tool-icon-card__name {
-  font-size: 0.72rem;
-  font-weight: 600;
-  color: var(--text-muted);
-  text-align: center;
-  line-height: 1.3;
+/* Grid de cards */
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 1.75rem;
+  justify-items: center;
+  min-height: 300px;
 }
+
+.tool-card {
+  background: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  padding: 1.4rem 1.75rem;
+  transition: transform 300ms ease, box-shadow 300ms ease;
+  position: relative;
+  cursor: default;
+  width: 100%;
+}
+html[data-theme="dark"] .tool-card {
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.tool-card__img {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  margin: 0 auto 0.75rem;
+  display: block;
+  transition: transform 400ms ease;
+}
+html[data-theme="dark"] .tool-card__img {
+  filter: drop-shadow(0 0 6px rgba(255,255,255,0.12));
+}
+
+.tool-card__name {
+  margin: 0;
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: #222;
+}
+html[data-theme="dark"] .tool-card__name { color: #e2e8f0; }
+
+/* Hover lift + scale */
+.tool-card:hover {
+  transform: translateY(-10px) scale(1.04);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+}
+html[data-theme="dark"] .tool-card:hover {
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
+}
+.tool-card:hover .tool-card__img { transform: scale(1.12); }
+
+/* Tooltip verde al hover */
+.tool-card::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--grad-tech);
+  color: #fff;
+  padding: 0.45rem 0.85rem;
+  border-radius: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 240ms ease;
+  z-index: 10;
+}
+.tool-card:hover::after { opacity: 1; }
 
 /* ── Formación: edu-timeline ── */
 .edu-timeline {
