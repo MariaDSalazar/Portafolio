@@ -70,7 +70,7 @@ function ProjectCard({ project }: { project: Project }) {
   const grad = LANG_GRAD[project.language ?? ""] ?? LANG_GRAD.default;
 
   return (
-    <article className="project-card reveal" data-reveal="">
+    <article className="project-card">
 
       {/* Imagen → clic abre el repo */}
       <a
