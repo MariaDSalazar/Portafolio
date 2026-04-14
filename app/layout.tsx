@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
+import { PortfolioChrome } from "./components/portfolio-chrome";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -9,19 +10,29 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Maria del Carmen Salazar | Portafolio Profesional",
+  title: "María del Carmen Salazar | Ingeniera en Computación",
   description:
-    "Portafolio profesional de Maria del Carmen Salazar, ingeniera en Ciencias de la Computacion con enfoque en desarrollo, tecnologia y educacion.",
+    "Portafolio profesional de María del Carmen Salazar Torres, Ingeniera en Ciencias de la Computación. Desarrollo de software, redes, ciberseguridad e IoT.",
 };
+
+const navigationItems = [
+  { label: "Inicio",           href: "/" },
+  { label: "Proyectos",        href: "/proyectos" },
+  { label: "Certificaciones",  href: "/certificaciones" },
+  { label: "Trayectoria",      href: "/trayectoria" },
+  { label: "Sobre mí",         href: "/sobre-mi" },
+  { label: "Contacto",         href: "/contacto" },
+];
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="es">
-      <body className={poppins.variable}>{children}</body>
+      <body className={poppins.variable}>
+        <PortfolioChrome navigationItems={navigationItems} />
+        {children}
+      </body>
     </html>
   );
 }

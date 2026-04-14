@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 type NavigationItem = {
@@ -41,67 +43,49 @@ function MoonIcon() {
   );
 }
 
+function MenuIcon() {
+  return (
+    <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" width="20" height="20">
+      <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" />
+    </svg>
+  );
+}
+
+function CloseIcon() {
+  return (
+    <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" width="20" height="20">
+      <path d="M18 6 6 18M6 6l12 12" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" />
+    </svg>
+  );
+}
+
 export function PortfolioChrome({ navigationItems }: PortfolioChromeProps) {
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [mounted, setMounted] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const storedTheme = window.localStorage.getItem("theme");
     const initialTheme =
       storedTheme === "dark" || storedTheme === "light" ? storedTheme : "light";
-
     document.documentElement.dataset.theme = initialTheme;
     document.documentElement.setAttribute("data-js", "");
     setTheme(initialTheme);
     setMounted(true);
   }, []);
 
+  // Scroll-reveal: anima elementos con [data-reveal] al entrar en pantalla
   useEffect(() => {
     const spotlight = document.getElementById("spotlight");
-    const sections = Array.from(document.querySelectorAll("section[id]"));
-    const navLinks = Array.from(
-      document.querySelectorAll<HTMLAnchorElement>("[data-nav-link]"),
-    );
 
     const updateSpotlight = (event: MouseEvent) => {
       spotlight?.style.setProperty("--x", `${event.clientX}`);
       spotlight?.style.setProperty("--y", `${event.clientY}`);
     };
-
     const showSpotlight = () => spotlight?.classList.add("spotlight--visible");
-    const hideSpotlight = () =>
-      spotlight?.classList.remove("spotlight--visible");
+    const hideSpotlight = () => spotlight?.classList.remove("spotlight--visible");
 
-    const sectionMap = new Map(
-      navLinks.map((link) => [link.getAttribute("href")?.slice(1), link]),
-    );
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visibleEntries = entries.filter((entry) => entry.isIntersecting);
-        if (visibleEntries.length === 0) return;
-
-        const current = visibleEntries.reduce((previous, entry) =>
-          entry.intersectionRatio > previous.intersectionRatio ? entry : previous,
-        );
-
-        navLinks.forEach((link) => {
-          link.classList.remove("nav__link--active");
-        });
-
-        sectionMap
-          .get(current.target.id)
-          ?.classList.add("nav__link--active");
-      },
-      {
-        rootMargin: "-45% 0px -45% 0px",
-        threshold: [0.2, 0.4, 0.6, 0.8],
-      },
-    );
-
-    sections.forEach((section) => observer.observe(section));
-
-    // ── Scroll-reveal: anima elementos con [data-reveal] al entrar en pantalla ──
     const revealObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -122,13 +106,12 @@ export function PortfolioChrome({ navigationItems }: PortfolioChromeProps) {
     document.addEventListener("mouseleave", hideSpotlight);
 
     return () => {
-      observer.disconnect();
       revealObserver.disconnect();
       document.removeEventListener("mousemove", updateSpotlight);
       document.removeEventListener("mouseenter", showSpotlight);
       document.removeEventListener("mouseleave", hideSpotlight);
     };
-  }, []);
+  }, [pathname]);
 
   const toggleTheme = () => {
     const nextTheme = theme === "dark" ? "light" : "dark";
@@ -137,29 +120,66 @@ export function PortfolioChrome({ navigationItems }: PortfolioChromeProps) {
     setTheme(nextTheme);
   };
 
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/" || pathname === "";
+    // Remove basePath prefix for comparison
+    const clean = pathname.replace(/^\/Portafolio/, "") || "/";
+    return clean === href || clean.startsWith(href + "/");
+  };
+
   return (
     <>
       <div className="spotlight" id="spotlight" />
 
       <header className="site-header">
         <div className="site-header__inner">
-          <nav aria-label="Navegacion principal" className="nav">
+          <nav aria-label="Navegación principal" className="nav nav--desktop">
             {navigationItems.map((item) => (
-              <a data-nav-link href={item.href} key={item.href}>
+              <Link
+                className={isActive(item.href) ? "nav__link--active" : ""}
+                href={item.href}
+                key={item.href}
+              >
                 {item.label}
-              </a>
+              </Link>
             ))}
           </nav>
 
-          <button
-            aria-label={theme === "dark" ? "Activar tema claro" : "Activar tema oscuro"}
-            className="theme-toggle"
-            onClick={toggleTheme}
-            type="button"
-          >
-            {mounted && theme === "dark" ? <SunIcon /> : <MoonIcon />}
-          </button>
+          <div className="nav-controls">
+            <button
+              aria-label={theme === "dark" ? "Activar tema claro" : "Activar tema oscuro"}
+              className="theme-toggle"
+              onClick={toggleTheme}
+              type="button"
+            >
+              {mounted && theme === "dark" ? <SunIcon /> : <MoonIcon />}
+            </button>
+
+            <button
+              aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
+              className="menu-toggle"
+              onClick={() => setMenuOpen((v) => !v)}
+              type="button"
+            >
+              {menuOpen ? <CloseIcon /> : <MenuIcon />}
+            </button>
+          </div>
         </div>
+
+        {menuOpen && (
+          <nav aria-label="Menú móvil" className="nav nav--mobile">
+            {navigationItems.map((item) => (
+              <Link
+                className={isActive(item.href) ? "nav__link--active" : ""}
+                href={item.href}
+                key={item.href}
+                onClick={() => setMenuOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+        )}
       </header>
     </>
   );
