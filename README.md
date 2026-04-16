@@ -1,112 +1,115 @@
 # Portafolio Profesional — María del Carmen Salazar Torres
 
-Portafolio profesional construido con Next.js 15, TypeScript y CSS personalizado.
-Diseño con degradados, modo oscuro/claro, separación técnica/social y despliegue en GitHub Pages.
+Portafolio personal construido con **Next.js 15 (App Router)**, **TypeScript** y **CSS puro con variables**. Incluye modo oscuro/claro, animaciones de scroll-reveal y despliegue automático en GitHub Pages mediante exportación estática.
+
+**Live:** [mariadSalazar.github.io/Portafolio](https://mariadSalazar.github.io/Portafolio)
 
 ---
 
-## Contenido del portafolio
+## Secciones
 
-| Sección | Descripción |
+| Ruta | Contenido |
 |---|---|
-| **Hero** | Presentación principal con nombre en degradado y accesos rápidos a contacto y trayectoria |
-| **Sobre mí** | Narrativa profesional con estadísticas clave (carreras, pasantía, certificaciones, maestría) |
-| **Perfil Técnico** | Ocho especialidades: Software, Servidores, IoT, Electrónica, QA, Diseño Web, Ciberseguridad, Redes |
-| **Perfil Social** | Cuatro competencias: Docencia, Investigación Científica, Trabajo Social, Inclusión Social |
-| **Trayectoria** | Timeline con formación académica, experiencia laboral y certificaciones |
-| **Contacto** | Botones directos a Gmail y WhatsApp · Links a LinkedIn, GitHub y ORCID |
+| `/` | Hero principal + Stack tecnológico con filtros |
+| `/sobre-mi` | Bio, idiomas, habilidades blandas e intereses |
+| `/formacion` | Formación académica con tarjetas por nivel |
+| `/experiencia` | Experiencia técnica con puntos clave por rol |
+| `/proyectos` | Repositorios públicos cargados desde la API de GitHub |
+| `/certificaciones` | Certificados con descarga directa |
+| `/contacto` | Gmail, LinkedIn, Telegram, ORCID y GitHub |
 
 ---
 
-## Stack tecnológico
+## Stack
 
-- **Next.js 15** con App Router
-- **React 19**
-- **TypeScript**
-- **CSS global** con variables, degradados y modo oscuro nativo
-- **Fuente:** Poppins (Google Fonts, pesos 300–800)
-
----
-
-## Sistema de diseño
-
-### Paleta de colores
-
-| Paleta | Uso | Colores |
+| Tecnología | Versión | Uso |
 |---|---|---|
-| **Técnica** (azul-índigo) | Sección técnica, botones primarios, stats | `#1d4ed8` → `#4338ca` |
-| **Social** (esmeralda-cian) | Sección social, píldoras sociales | `#047857` → `#0369a1` |
-| **Educación** (violeta) | Puntos de timeline educativo | `#5b21b6` → `#7e22ce` |
-| **Certificados** (ámbar) | Puntos de timeline de certificaciones | `#b45309` → `#d97706` |
-| **Hero** | Fondo oscuro del hero | `#020617` → `#1e1b4b` |
-
-### Características visuales
-
-- Degradados visibles en fondos de sección, tarjetas, botones y texto de encabezados
-- Modo oscuro mediante `data-theme="dark"` y persistencia en `localStorage`
-- Efecto spotlight que sigue el cursor del usuario
-- Badge animado con anillo giratorio en el hero
-- Timeline codificado por color según tipo de entrada (educación, trabajo, certificación)
-- Animaciones de aparición al desplazar (scroll-reveal) con retardo escalonado
+| Next.js | ^15.4 | Framework, App Router, exportación estática |
+| React | ^19.0 | UI |
+| TypeScript | — | Tipado estático |
+| CSS global | — | Sistema de diseño completo (variables, dark mode, responsive) |
+| Poppins | Google Fonts | Tipografía (pesos 300–800) |
 
 ---
 
-## Estructura de archivos
+## Estructura
 
 ```
 app/
-├── layout.tsx              # Layout global, fuente Poppins y metadata
-├── page.tsx                # Página principal con todas las secciones
-├── globals.css             # Sistema de diseño completo (variables, componentes, responsive)
+├── layout.tsx                  # Layout global, fuente y metadata
+├── globals.css                 # Sistema de diseño (variables, componentes, responsive)
+├── page.tsx                    # Inicio: Hero + ToolsSection
+├── sobre-mi/page.tsx
+├── formacion/page.tsx
+├── experiencia/page.tsx
+├── proyectos/page.tsx          # "use client" — consume GitHub API
+├── certificaciones/page.tsx
+├── contacto/page.tsx
 └── components/
-    └── portfolio-chrome.tsx # Header fijo, navegación, toggle de tema, spotlight, scroll-reveal
+    ├── portfolio-chrome.tsx    # Header, nav, tema, spotlight, scroll-reveal
+    └── tools-section.tsx       # Grid de tecnologías con filtros
 public/
-└── image.png               # Foto de perfil
-.github/
-└── workflows/
-    └── deploy.yml          # Pipeline de CI/CD para GitHub Pages
+└── certificados/               # PDFs descargables
+.github/workflows/
+└── deploy.yml                  # CI/CD → GitHub Pages
 ```
+
+---
+
+## Requisitos previos
+
+- **Node.js** ≥ 18
+- **npm** ≥ 9
+
+---
+
+## Ejecución local
+
+```bash
+# 1. Clonar el repositorio
+git clone https://github.com/MariaDSalazar/Portafolio.git
+cd Portafolio
+
+# 2. Instalar dependencias
+npm install
+
+# 3. Iniciar servidor de desarrollo
+npm run dev
+# → http://localhost:3000
+```
+
+> El servidor de desarrollo ignora `basePath` y `assetPrefix`, por lo que las rutas funcionan directamente en `localhost:3000`.
 
 ---
 
 ## Scripts
 
-```bash
-npm run dev      # Servidor de desarrollo en http://localhost:3000
-npm run build    # Build de producción (genera /out para exportación estática)
-npm run start    # Levantar build de producción localmente
-npm run lint     # Ejecutar ESLint
-```
+| Comando | Descripción |
+|---|---|
+| `npm run dev` | Servidor de desarrollo con hot-reload |
+| `npm run build` | Build de producción → genera `/out` |
+| `npm run start` | Sirve el build de producción localmente |
+| `npm run lint` | Ejecuta ESLint |
 
 ---
 
 ## Despliegue en GitHub Pages
 
-El proyecto está configurado para desplegarse automáticamente en GitHub Pages con exportación estática de Next.js.
+El despliegue es **automático** en cada push a `main` vía `.github/workflows/deploy.yml`.
 
-### Configuración requerida (una sola vez)
+### Configuración inicial (una sola vez)
 
-1. Ve al repositorio en GitHub: `github.com/MariaDSalazar/Portafolio`
-2. Entra a **Settings** → **Pages**
-3. En **Source**, selecciona **GitHub Actions**
-4. Guarda los cambios
+1. Ir a **Settings → Pages** del repositorio
+2. En **Source**, seleccionar **GitHub Actions**
+3. Guardar
 
-### Despliegue automático
+El workflow instala dependencias, ejecuta `npm run build` y publica la carpeta `/out`.
 
-Cada vez que se haga `git push` a la rama `main`, el workflow en `.github/workflows/deploy.yml` ejecuta automáticamente:
-
-1. Instala dependencias (`npm ci`)
-2. Genera el sitio estático (`npm run build` → carpeta `/out`)
-3. Publica en GitHub Pages
-
-El sitio queda disponible en:
-`https://mariadSalazar.github.io/Portafolio`
-
-### Configuración Next.js para exportación estática
+### Configuración Next.js relevante
 
 ```ts
 // next.config.ts
-const nextConfig = {
+const nextConfig: NextConfig = {
   output: "export",
   basePath: "/Portafolio",
   assetPrefix: "/Portafolio",
@@ -115,11 +118,13 @@ const nextConfig = {
 };
 ```
 
+> `basePath` y `assetPrefix` deben coincidir con el nombre exacto del repositorio en GitHub.
+
 ---
 
-## Contacto
+## Notas de desarrollo
 
-- **Correo:** maricarmen19salazar@gmail.com
-- **LinkedIn:** [linkedin.com/in/mariasalazar24](https://www.linkedin.com/in/mariasalazar24)
-- **GitHub:** [github.com/MariaDSalazar](https://github.com/MariaDSalazar)
-- **ORCID:** [orcid.org/0009-0005-5661-4428](https://orcid.org/0009-0005-5661-4428)
+- **Modo oscuro:** se activa con `html[data-theme="dark"]` y persiste en `localStorage`.
+- **Scroll-reveal:** los elementos con clase `reveal` y atributo `data-reveal=""` son observados por un `IntersectionObserver` en `portfolio-chrome.tsx`.
+- **API de GitHub:** la página `/proyectos` consume `api.github.com` en el cliente; si se alcanza el límite de la API (60 req/h sin token), muestra un mensaje de error con enlace al perfil.
+- **Certificados:** los PDFs deben colocarse en `public/certificados/` y referenciarse en `certificaciones/page.tsx`.
