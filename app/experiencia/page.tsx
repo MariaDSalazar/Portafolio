@@ -1,29 +1,20 @@
 const experienciaItems = [
   {
-    title: "Laboratorio de Computación Aplicada — UNL",
+    title: "Data Center — Carrera de Computación, UNL",
     period: "Jun 2024 – Mar 2025",
-    duration: "9 meses · Pasantías",
+    duration: "9 meses · Servicios comunitarios",
     description:
-      "Soporte técnico avanzado, mantenimiento de infraestructura y desarrollo de soluciones digitales en un entorno de alta demanda operativa dentro de la Carrera de Computación.",
-    skills: ["Infraestructura", "Soporte técnico", "Servidores", "Redes"],
+      "Elaboración de inventarios y control de equipos tecnológicos. Soporte técnico presencial, instalación y configuración de software. Diseño e implementación de cableado estructurado. Administración del software de servidores en Proxmox, redacción de manuales e informes técnicos. Atención y asistencia a usuarios internos y externos del Data Center.",
+    skills: ["Proxmox", "Servidores", "Cableado estructurado", "Linux", "Inventarios", "Soporte TI"],
     dotClass: "timeline__dot--work",
   },
   {
-    title: "Subdirección de Seguridad y Salud Ocupacional — UNL",
-    period: "Jun 2023 – Ene 2024",
-    duration: "8 meses · Pasantías",
-    description:
-      "Apoyo tecnológico en la gestión de información digital, procesos documentales y soporte transversal al área.",
-    skills: ["Gestión digital", "Soporte técnico"],
-    dotClass: "timeline__dot--work",
-  },
-  {
-    title: "Mantenimiento DTI — UNL",
+    title: "Pasante de Soporte Técnico — DTI, UNL",
     period: "Oct 2021 – Dic 2021",
-    duration: "3 meses · Pasantías",
+    duration: "3 meses · Prácticas preprofesionales",
     description:
-      "Mantenimiento preventivo y correctivo de equipos, instalación de software y soporte técnico de primer nivel dentro del Departamento de Tecnologías de la Información.",
-    skills: ["Hardware", "Software", "Soporte TI"],
+      "Mantenimiento preventivo y correctivo de computadores e impresoras. Diagnóstico y resolución de fallas de hardware y software. Soporte técnico al usuario, cableado estructurado y soporte básico de red dentro del Departamento de Tecnologías de la Información.",
+    skills: ["Hardware", "Mantenimiento", "Redes", "Soporte TI"],
     dotClass: "timeline__dot--work",
   },
 ];
@@ -75,14 +66,10 @@ export default function ExperienciaPage() {
       <section className="content-section">
         <div className="content-section__inner">
 
-          <div className="page-hero reveal" data-reveal="">
-            <span className="section-heading__badge section-heading__badge--tech">Laboral</span>
+          <div className="page-hero reveal" data-reveal="" style={{ textAlign: "center" }}>
             <h1>
               <span className="section-heading__grad-text">Experiencia Técnica</span>
             </h1>
-            <p className="page-hero__desc">
-              Experiencia en entornos universitarios reales — soporte, infraestructura y desarrollo dentro del ecosistema tecnológico de la UNL.
-            </p>
           </div>
 
           <div className="exp-timeline">

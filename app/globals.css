@@ -1731,6 +1731,115 @@ html[data-theme="dark"] .cert-view-btn { color: #fbbf24; border-color: rgba(245,
 }
 .contact-note p { margin: 0; }
 
+/* ── CONTACTO: social-grid (cards dinámicas) ── */
+.social-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(185px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.social-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 1.25rem;
+  border: 1px solid var(--border);
+  background: var(--surface-card);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: var(--shadow);
+  transition: transform 260ms ease, box-shadow 260ms ease, border-color 260ms ease;
+}
+.social-card:hover { transform: translateY(-6px); }
+
+/* Glow por variante */
+.social-card--gmail:hover     { border-color: rgba(234,67,53,.45);   box-shadow: 0 12px 40px rgba(234,67,53,.22); }
+.social-card--linkedin:hover  { border-color: rgba(10,102,194,.45);  box-shadow: 0 12px 40px rgba(10,102,194,.22); }
+.social-card--whatsapp:hover  { border-color: rgba(37,211,102,.45);  box-shadow: 0 12px 40px rgba(37,211,102,.2); }
+.social-card--orcid:hover     { border-color: rgba(166,206,57,.55);  box-shadow: 0 12px 40px rgba(166,206,57,.2); }
+.social-card--github:hover    { border-color: rgba(87,96,106,.45);   box-shadow: 0 12px 40px rgba(87,96,106,.2); }
+
+/* Banner con gradiente de marca */
+.social-card__banner {
+  position: relative;
+  height: 108px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.social-card--gmail    .social-card__banner { background: linear-gradient(135deg, #ea4335, #fbbc04); }
+.social-card--linkedin .social-card__banner { background: linear-gradient(135deg, #0a66c2, #0073b1); }
+.social-card--whatsapp .social-card__banner { background: linear-gradient(135deg, #25d366, #128c7e); }
+.social-card--orcid    .social-card__banner { background: linear-gradient(135deg, #a6ce39, #6faa00); }
+.social-card--github   .social-card__banner { background: linear-gradient(135deg, #24292e, #57606a); }
+
+/* Círculos decorativos */
+.social-card__blob {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,.12);
+  pointer-events: none;
+}
+.social-card__blob--1 { width: 110px; height: 110px; top: -38px; right: -22px; }
+.social-card__blob--2 { width: 65px;  height: 65px;  bottom: -22px; left: 14px; }
+
+/* Icono en anillo translúcido */
+.social-card__icon-ring {
+  position: relative;
+  z-index: 1;
+  width: 58px; height: 58px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.18);
+  border: 2px solid rgba(255,255,255,.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  backdrop-filter: blur(6px);
+  transition: transform 260ms ease;
+}
+.social-card:hover .social-card__icon-ring { transform: scale(1.08); }
+
+/* Contenido */
+.social-card__content {
+  padding: 1.1rem 1.2rem 1.3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  text-align: center;
+  flex: 1;
+}
+
+.social-card__platform {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.social-card__handle {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  word-break: break-all;
+  line-height: 1.4;
+}
+
+.social-card__cta {
+  margin-top: 0.6rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: gap 180ms ease, color 180ms ease;
+}
+.social-card:hover .social-card__cta { color: var(--tech-a); gap: 0.45rem; }
+
 /* ── Badges adicionales ── */
 .section-heading__badge--edu  { background: var(--grad-edu); }
 .section-heading__grad-text--edu {
@@ -2085,6 +2194,158 @@ html[data-theme="dark"] .exp-skill-chip { color: #93c5fd; }
   border-radius: 0.75rem;
 }
 
+/* ── Formación: edu-feat-grid (cards dinámicas) ── */
+.edu-feat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.edu-feat-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 1.1rem;
+  border: 1px solid var(--border);
+  background: var(--surface-card);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 250ms ease, box-shadow 250ms ease, border-color 250ms ease;
+}
+.edu-feat-card:hover { transform: translateY(-5px); }
+.edu-feat-card--masters:hover    { border-color: var(--border-edu);  box-shadow: 0 10px 40px color-mix(in srgb, var(--edu-a) 16%, transparent); }
+.edu-feat-card--engineering:hover { border-color: var(--border-tech); box-shadow: 0 10px 40px color-mix(in srgb, var(--tech-a) 16%, transparent); }
+.edu-feat-card--social:hover     { border-color: var(--border-social); box-shadow: 0 10px 40px color-mix(in srgb, var(--social-a) 16%, transparent); }
+.edu-feat-card--highschool:hover { border-color: rgba(71,85,105,.3); box-shadow: 0 10px 40px rgba(71,85,105,.15); }
+
+/* Banner superior coloreado */
+.edu-feat-card__banner {
+  position: relative;
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.edu-feat-card--masters .edu-feat-card__banner    { background: var(--grad-edu); }
+.edu-feat-card--engineering .edu-feat-card__banner { background: var(--grad-tech); }
+.edu-feat-card--social .edu-feat-card__banner     { background: var(--grad-social); }
+.edu-feat-card--highschool .edu-feat-card__banner  { background: linear-gradient(135deg, #475569, #64748b); }
+
+/* Círculos decorativos en el banner */
+.edu-feat-card__blob {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,.1);
+  pointer-events: none;
+}
+.edu-feat-card__blob--1 { width: 130px; height: 130px; top: -45px; right: -25px; }
+.edu-feat-card__blob--2 { width: 75px;  height: 75px;  bottom: -28px; left: 18px; }
+
+/* Círculo con icono */
+.edu-feat-card__icon-ring {
+  position: relative;
+  z-index: 1;
+  width: 62px; height: 62px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.18);
+  border: 2px solid rgba(255,255,255,.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  backdrop-filter: blur(6px);
+}
+
+/* Badge "En curso" */
+.edu-feat-card__progress-badge {
+  position: absolute;
+  top: 0.7rem; right: 0.7rem;
+  z-index: 2;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(255,255,255,.22);
+  border: 1px solid rgba(255,255,255,.45);
+  color: #fff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  backdrop-filter: blur(6px);
+}
+
+/* Contenido */
+.edu-feat-card__content {
+  padding: 1.4rem 1.5rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex: 1;
+}
+
+/* Tag de nivel */
+.edu-feat-card__tag {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 0.2rem;
+}
+.edu-feat-card__tag--masters    { background: color-mix(in srgb, var(--edu-a) 11%, transparent);    color: var(--edu-a); }
+.edu-feat-card__tag--engineering { background: color-mix(in srgb, var(--tech-a) 11%, transparent);   color: var(--tech-a); }
+.edu-feat-card__tag--social     { background: color-mix(in srgb, var(--social-a) 11%, transparent); color: var(--social-a); }
+.edu-feat-card__tag--highschool  { background: rgba(71,85,105,.12); color: #475569; }
+
+html[data-theme="dark"] .edu-feat-card__tag--masters    { background: rgba(139,92,246,.2);  color: #c084fc; }
+html[data-theme="dark"] .edu-feat-card__tag--engineering { background: rgba(99,130,241,.2); color: #93c5fd; }
+html[data-theme="dark"] .edu-feat-card__tag--social     { background: rgba(6,182,120,.2);   color: #6ee7b7; }
+html[data-theme="dark"] .edu-feat-card__tag--highschool  { background: rgba(71,85,105,.25); color: #94a3b8; }
+
+.edu-feat-card__title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.4;
+}
+
+.edu-feat-card__meta {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.edu-feat-card--masters    .edu-feat-card__meta { color: var(--edu-a); }
+.edu-feat-card--engineering .edu-feat-card__meta { color: var(--tech-a); }
+.edu-feat-card--social     .edu-feat-card__meta { color: var(--social-a); }
+.edu-feat-card--highschool  .edu-feat-card__meta { color: #475569; }
+
+html[data-theme="dark"] .edu-feat-card--masters    .edu-feat-card__meta { color: #c084fc; }
+html[data-theme="dark"] .edu-feat-card--engineering .edu-feat-card__meta { color: #93c5fd; }
+html[data-theme="dark"] .edu-feat-card--social     .edu-feat-card__meta { color: #6ee7b7; }
+html[data-theme="dark"] .edu-feat-card--highschool  .edu-feat-card__meta { color: #94a3b8; }
+
+.edu-feat-card__date {
+  margin: 0;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.edu-feat-card__senescyt {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+.edu-feat-card__desc {
+  margin: 0.5rem 0 0;
+  font-size: 0.875rem;
+  color: var(--text-soft);
+  line-height: 1.75;
+}
+
 /* ═══════════════════════════════════════════════════════
    RESPONSIVE — multi-página
 ═══════════════════════════════════════════════════════ */
@@ -2094,6 +2355,10 @@ html[data-theme="dark"] .exp-skill-chip { color: #93c5fd; }
   .nav--mobile  { display: flex; }
 
   .trayectoria-layout { grid-template-columns: 1fr; gap: 2rem; }
+}
+
+@media (max-width: 720px) {
+  .edu-feat-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 600px) {
