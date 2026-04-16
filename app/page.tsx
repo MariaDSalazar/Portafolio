@@ -46,7 +46,7 @@ export default function Home() {
 
             <p className="hero__summary">
               Ingeniera enfocada en desarrollo de software, redes, ciberseguridad e IoT.
-              Certificada por Cisco. Experiencia real en infraestructura universitaria de alta demanda.
+              Certificada por Cisco.
               <br />
               <strong style={{ color: "rgba(255,255,255,0.85)", fontWeight: 600 }}>
                 Construyo soluciones técnicas que funcionan en producción.
