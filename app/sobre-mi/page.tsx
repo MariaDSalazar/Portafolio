@@ -57,15 +57,10 @@ export default function SobreMiPage() {
       <section className="content-section">
         <div className="content-section__inner">
 
-          <div className="page-hero reveal" data-reveal="">
-            <span className="section-heading__badge section-heading__badge--social">Perfil completo</span>
+          <div className="page-hero reveal" data-reveal="" style={{ textAlign: "center" }}>
             <h1>
               <span className="section-heading__grad-text--social">Sobre mí</span>
             </h1>
-            <p className="page-hero__desc">
-              Más allá de la ingeniería: docencia, investigación científica y experiencia en trabajo social.
-              Un perfil multidisciplinar que aporta perspectiva humana real a cada proyecto.
-            </p>
           </div>
 
           <div className="sobre-exp-grid">
