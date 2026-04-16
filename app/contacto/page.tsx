@@ -110,7 +110,6 @@ export default function ContactoPage() {
         <div className="content-section__inner">
 
           <div className="page-hero reveal" data-reveal="" style={{ textAlign: "center" }}>
-            <span className="section-heading__badge section-heading__badge--tech">Contacto</span>
             <h1>
               <span className="section-heading__grad-text">Contáctame</span>
             </h1>
