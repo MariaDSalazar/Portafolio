@@ -16,14 +16,11 @@ type Project = Repo & { languages: string[] };
 
 /* ── Configuración ── */
 const OWNER    = "MariaDSalazar";
-const HIDDEN   = new Set(["Portafolio", "practica11", "Jenniffer", "RMI", "frontend-pis6to"]);
-const FEATURED = new Set(["prototipoIoTBiometric", "Libro-Ciberseguridad-UNL", "Web-Project-with-clean-Architecture"]);
+const HIDDEN   = new Set(["Portafolio", "MariaDSalazar"]);
+const FEATURED = new Set(["prototipoIoTBiometric", "soundmind", "SciFinder"]);
 
 /** Descripciones de respaldo para repos sin descripción en GitHub */
-const FALLBACK_DESC: Record<string, string> = {
-  "Web-Project-with-clean-Architecture":
-    "Proyecto web desarrollado aplicando arquitectura limpia, separación de responsabilidades y buenas prácticas de desarrollo frontend.",
-};
+const FALLBACK_DESC: Record<string, string> = {};
 
 /** Colores por lenguaje para los chips */
 const LANG_COLOR: Record<string, { bg: string; fg: string }> = {
